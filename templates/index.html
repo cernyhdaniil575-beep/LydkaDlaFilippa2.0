@@ -3,261 +3,247 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Слоты - Веб-версия игры</title>
+    <title>Слоты | Веб-версия</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
             font-family: 'Arial', sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            padding: 20px;
+            margin: 0;
+            padding: 0;
         }
-
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 30px;
-            color: white;
+            padding: 20px;
+            color: #fff;
         }
-
         .header h1 {
-            font-size: 32px;
+            font-size: 28px;
+            margin: 0;
         }
-
         .user-info {
             display: flex;
-            gap: 20px;
+            gap: 15px;
             align-items: center;
         }
-
         .balance {
-            font-size: 18px;
+            font-size: 19px;
             font-weight: bold;
         }
-
         .btn-logout, .btn-history {
-            padding: 10px 20px;
-            background: white;
+            padding: 9px 15px;
+            background: #fff;
             color: #667eea;
             border: none;
-            border-radius: 5px;
+            border-radius: 7px;
             cursor: pointer;
             font-weight: bold;
-            transition: transform 0.2s;
+            font-size: 15px;
+            transition: transform 0.15s;
         }
-
         .btn-logout:hover, .btn-history:hover {
             transform: translateY(-2px);
         }
-
         .container {
-            max-width: 600px;
-            margin: 0 auto;
-            background: white;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            max-width: 510px;
+            margin: 40px auto;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(20, 20, 60, .16);
+            padding: 38px 38px 28px 38px;
         }
-
         .game-title {
             text-align: center;
             color: #333;
-            margin-bottom: 30px;
-            font-size: 24px;
+            font-size: 22px;
+            margin-bottom: 24px;
+            letter-spacing: 1px;
         }
-
         .slot-machine {
+            margin-bottom: 24px;
+        }
+        .slot-row {
             display: flex;
             justify-content: center;
-            gap: 15px;
-            margin-bottom: 30px;
+            margin-bottom: 9px;
         }
-
         .slot {
-            width: 80px;
-            height: 100px;
-            border: 3px solid #667eea;
-            border-radius: 10px;
+            width: 48px;
+            height: 52px;
+            border: 2.4px solid #667eea;
+            border-radius: 9px;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 48px;
+            font-size: 30px;
             background: #f0f0f0;
-            animation: spin 0.6s ease-out;
+            margin: 0 5px;
         }
-
-        @keyframes spin {
-            0% { transform: rotateY(0deg); }
-            100% { transform: rotateY(360deg); }
-        }
-
         .controls {
-            margin-bottom: 30px;
+            margin-bottom: 27px;
         }
-
         .form-group {
-            margin-bottom: 15px;
+            margin-bottom: 14px;
         }
-
         label {
             display: block;
             margin-bottom: 8px;
-            color: #555;
+            color: #444;
             font-weight: bold;
         }
-
         input[type="number"] {
             width: 100%;
             padding: 10px;
             border: 2px solid #ddd;
-            border-radius: 5px;
-            font-size: 16px;
+            border-radius: 6px;
+            font-size: 17px;
         }
-
         input[type="number"]:focus {
-            outline: none;
             border-color: #667eea;
         }
-
-        .button-group {
-            display: flex;
-            gap: 10px;
-        }
-
         button {
-            flex: 1;
-            padding: 12px;
+            width: 100%;
+            padding: 13px 0;
+            margin-top: 9px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            color: #fff;
             border: none;
-            border-radius: 5px;
-            font-size: 16px;
+            border-radius: 7px;
+            font-size: 17px;
             font-weight: bold;
             cursor: pointer;
-            transition: transform 0.2s;
+            transition: background 0.18s, transform 0.12s;
         }
-
         button:hover {
+            background: linear-gradient(135deg, #5a62de 0%, #8756df 100%);
             transform: translateY(-2px);
         }
-
         button:disabled {
-            opacity: 0.5;
+            opacity: 0.55;
             cursor: not-allowed;
-            transform: none;
         }
-
         .result {
+            margin: 23px 0 0 0;
             text-align: center;
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+            padding: 17px 0 15px 0;
+            border-radius: 9px;
             display: none;
         }
-
         .result.win {
-            background-color: #d4edda;
-            color: #155724;
-            border: 2px solid #28a745;
+            background: #d4edda;
+            color: #228b49;
             display: block;
         }
-
         .result.loss {
-            background-color: #f8d7da;
-            color: #721c24;
-            border: 2px solid #f5c6cb;
+            background: #f8d7da;
+            color: #a71222;
             display: block;
         }
-
         .result.jackpot {
-            background-color: #fff3cd;
-            color: #856404;
-            border: 2px solid #ffeeba;
+            background: #fff3cd;
+            color: #896c18;
             display: block;
-            animation: pulse 0.6s infinite;
+            animation: pulse 0.7s infinite;
         }
-
         @keyframes pulse {
             0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+            50% { transform: scale(1.04); }
         }
-
-        .result-text {
-            font-size: 18px;
-            font-weight: bold;
-            margin-bottom: 10px;
+        .topup-block {
+            margin-bottom:17px;
+            text-align:center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 9px;
         }
-
-        .win-amount {
-            font-size: 24px;
-            font-weight: bold;
+        .topup-field {
+            width: 60%;
+            padding: 8px;
+            border-radius: 6px;
+            border: 1.5px solid #667eea;
+            font-size: 17px;
+        }
+        .topup-btn {
+            padding: 9px 18px;
+            border-radius: 6px;
+            background:#667eea;
+            color:#fff;
+            border:none;
+            font-weight:bold;
+            cursor:pointer;
+            transition: background .17s;
+        }
+        .topup-btn:hover {
+            background: #898fff;
         }
     </style>
 </head>
 <body>
     <div class="header">
-        <div>
-            <h1>🎰 Слоты</h1>
-        </div>
+        <h1>🎰 Слоты</h1>
         <div class="user-info">
             <span style="font-size: 18px;">{{ user.username }}</span>
-            <div class="balance">Баланс: <span id="balance">{{ user.balance }}</span>₽</div>
+            <span class="balance" id="balance">{{ user.balance }}</span>₽
             <button class="btn-history" onclick="window.location.href='/history'">История</button>
             <button class="btn-logout" onclick="window.location.href='/logout'">Выход</button>
         </div>
     </div>
-
     <div class="container">
         <div class="game-title">Крутите слоты и выигрывайте!</div>
-
-        <div class="slot-machine" id="slotMachine">
-            <div class="slot">🍎</div>
-            <div class="slot">🍊</div>
-            <div class="slot">🍋</div>
+        <!-- ======= Пополнение ======= -->
+        <div class="topup-block">
+            <input type="number" min="1" id="topupAmount" class="topup-field" placeholder="Сумма пополнения (₽)">
+            <button type="button" class="topup-btn" onclick="topUp()">Пополнить</button>
         </div>
-
+        <!-- ======= /Пополнение ======= -->
+        <div class="slot-machine" id="slotMachine"></div>
         <div class="controls">
             <div class="form-group">
                 <label for="bet">Ставка (₽):</label>
                 <input type="number" id="bet" min="1" value="10">
             </div>
-
-            <div class="button-group">
-                <button onclick="spin()" id="spinBtn">🔄 Крутить!</button>
-            </div>
+            <button onclick="spin()" id="spinBtn">🔄 Крутить!</button>
         </div>
-
-        <div class="result" id="result">
-            <div class="result-text" id="resultText"></div>
-            <div class="win-amount" id="winAmount"></div>
-        </div>
+        <div class="result" id="result"></div>
     </div>
-
     <script>
+        function renderSlots(rows) {
+            const slotMachine = document.getElementById('slotMachine');
+            slotMachine.innerHTML = '';
+            rows.forEach(row => {
+                const rowDiv = document.createElement('div');
+                rowDiv.className = 'slot-row';
+                row.forEach(symbol => {
+                    const symbolDiv = document.createElement('div');
+                    symbolDiv.className = 'slot';
+                    symbolDiv.textContent = symbol;
+                    rowDiv.appendChild(symbolDiv);
+                });
+                slotMachine.appendChild(rowDiv);
+            });
+        }
+        // При первой загрузке покажем случай
+        renderSlots([['🍒','🍋','🍊','🍇','🔔'],['🍇','🍊','🍋','🍒','🍋'],['🍒','🍒','🍋','🍇','🍋'],['💎','🍇','🍒','💎','🍋']])
+
         async function spin() {
             const betInput = document.getElementById('bet');
             const bet = parseFloat(betInput.value);
             const spinBtn = document.getElementById('spinBtn');
             const balanceSpan = document.getElementById('balance');
-
             if (bet <= 0) {
-                alert('Ставка должна быть больше 0');
+                alert("Ставка должна быть больше 0");
                 return;
             }
-
             if (bet > parseFloat(balanceSpan.textContent)) {
-                alert('Недостаточно средств');
+                alert("Недостаточно средств");
                 return;
             }
-
             spinBtn.disabled = true;
-
             try {
                 const response = await fetch('/spin', {
                     method: 'POST',
@@ -266,56 +252,56 @@
                     },
                     body: JSON.stringify({ bet: bet })
                 });
-
                 const data = await response.json();
-
-                const slots = document.querySelectorAll('.slot');
-                slots.forEach((slot, index) => {
-                    slot.textContent = data.symbols[index];
-                });
-
+                if (data.error) {
+                    alert(data.error);
+                    return;
+                }
+                renderSlots(data.spins);
                 balanceSpan.textContent = data.new_balance.toFixed(2);
-
                 const resultDiv = document.getElementById('result');
-                const resultText = document.getElementById('resultText');
-                const winAmount = document.getElementById('winAmount');
-
                 resultDiv.className = 'result';
-
                 if (data.result === 'jackpot') {
                     resultDiv.classList.add('jackpot');
-                    resultText.textContent = '🎉 ДЖЕКПОТ! 🎉';
-                    winAmount.textContent = `Вы выиграли: ${data.win}₽`;
+                    resultDiv.textContent = '🎉 ДЖЕКПОТ! Вы выиграли: ' + data.win + '₽';
                 } else if (data.result === 'win') {
                     resultDiv.classList.add('win');
-                    resultText.textContent = '✅ Выигрыш!';
-                    winAmount.textContent = `Вы выиграли: ${data.win}₽`;
+                    resultDiv.textContent = 'УДАЧА! Вы выиграли: ' + data.win + '₽';
                 } else {
                     resultDiv.classList.add('loss');
-                    resultText.textContent = '❌ Проигрыш';
-                    winAmount.textContent = `Вы потеряли: ${bet}₽`;
+                    resultDiv.textContent = 'Повезет в следующий раз!';
                 }
             } catch (error) {
-                console.error('Ошибка:', error);
                 alert('Ошибка при обработке ставки');
-            } finally {
-                spinBtn.disabled = false;
             }
+            spinBtn.disabled = false;
         }
 
-        // Обновление баланса каждые 5 секунд
-        setInterval(async () => {
-            try {
-                const response = await fetch('/balance');
-                const data = await response.json();
-                document.getElementById('balance').textContent = data.balance.toFixed(2);
-            } catch (error) {
-                console.error('Ошибка обновления баланса:', error);
+        async function topUp() {
+            const inp = document.getElementById('topupAmount');
+            const amount = parseFloat(inp.value);
+            if (isNaN(amount) || amount <= 0) {
+                alert('Введите корректную сумму!');
+                return;
             }
-        }, 5000);
-
-        // Enter для ставки
-        document.getElementById('bet').addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') spin();
-        });
+            try {
+                const response = await fetch('/topup', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ amount: amount })
+                });
+                const data = await response.json();
+                if (data.error) {
+                    alert(data.error);
+                    return;
+                }
+                document.getElementById('balance').textContent = data.new_balance.toFixed(2);
+                alert('Баланс успешно пополнен!');
+                inp.value = '';
+            } catch (error) {
+                alert('Ошибка при пополнении');
+            }
+        }
     </script>
+</body>
+</html>
